@@ -1,6 +1,5 @@
 import React from "react";
 import Card from "react-bootstrap/Card";
-import "./Home/Home.css";
 import { Icon, IconButton } from "@mui/material";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlined";
@@ -35,7 +34,7 @@ export default function CardMovie({ movie }) {
         </Card.Text>
         <Card.Title className="text-white">{movie.title}</Card.Title>
         <Card.Text className="text-white">
-          {movie.release_date.substring(0, 4)}
+          {movie.release_date ? movie.release_date?.substring(0, 4) : ""}
         </Card.Text>
       </Card.ImgOverlay>
     </Card>
