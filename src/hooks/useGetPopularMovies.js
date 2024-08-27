@@ -10,7 +10,6 @@ export const useGetPopularMovies = () => {
     const response = await fetch(url);
     const responseJson = await response.json();
 
-    console.log("populllra", popular);
     setPopular(responseJson.results);
   };
 
