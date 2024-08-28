@@ -10,7 +10,7 @@ export default function NowPlaying({ movie }) {
 
   return (
     <div className="container-fluid now-playing">
-      <Row className="rows">
+      <Row className="horizontal-rows">
         {movie.map((mov) => (
           <HorizontalCard movie={mov} />
         ))}
