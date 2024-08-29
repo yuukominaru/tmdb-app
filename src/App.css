@@ -115,6 +115,7 @@ h3 {
 
 .login-logo {
   width: 15rem;
+  cursor: pointer;
 }
 
 @media (max-width: 768px) {

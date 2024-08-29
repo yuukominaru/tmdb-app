@@ -4,7 +4,12 @@ import HorizontalCard from "../Reusable/HorizontalCard";
 import Loading from "../Reusable/Loading";
 import Error from "../Reusable/Error";
 
-export default function NowPlaying({ movie, error }) {
+export default function NowPlaying({
+  movie,
+  error,
+  addFavorite,
+  removeFavorite,
+}) {
   return (
     <>
       {movie?.length === 0 ? (
@@ -15,7 +20,12 @@ export default function NowPlaying({ movie, error }) {
         <div className="container-fluid now-playing">
           <Row className="horizontal-rows">
             {movie?.map((mov) => (
-              <HorizontalCard movie={mov} />
+              <HorizontalCard
+              key={mov?.id}
+                movie={mov}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
+              />
             ))}
           </Row>
         </div>

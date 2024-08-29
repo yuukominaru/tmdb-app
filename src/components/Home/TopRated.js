@@ -12,10 +12,10 @@ export default function TopRated({ movie, error }) {
       ) : error ? (
         <Error />
       ) : (
-        <div className="container top-rated">
+        <div className="container-fluid top-rated">
           <Row xs="2" sm="3" md="4" lg="4" xl="5">
             {movie?.map((mov) => (
-              <TiledCard movie={mov} />
+              <TiledCard key={mov?.id} movie={mov} />
             ))}
           </Row>
         </div>

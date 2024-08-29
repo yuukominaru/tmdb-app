@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { IconButton } from "@mui/material";
 import { useGetSessionToken } from "../hooks/useGetSessionToken";
 import Search from "@mui/icons-material/Search";
@@ -10,18 +10,23 @@ import { useEffect, useState } from "react";
 import ModalLogin from "./Login/ModalLogin";
 
 export default function CustomNavbar() {
-  const { sessionToken, getRequestToken, deleteSession } = useGetSessionToken();
+  const {
+    sessionToken,
+    sessionV3,
+    getRequestToken,
+    deleteSession,
+    deleteSessionV3,
+  } = useGetSessionToken();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [modalShow, setModalShow] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
 
   useEffect(() => {
     if (sessionToken) {
       setIsLoggedIn(true);
     }
   }, [sessionToken]);
-
-  console.log("sessiontoken", sessionToken);
 
   const handleNavigate = (path) => {
     if (isLoggedIn) {
@@ -33,7 +38,9 @@ export default function CustomNavbar() {
 
   const handleDeleteSession = () => {
     deleteSession(sessionToken);
+    deleteSessionV3(sessionV3);
     setIsLoggedIn(false);
+    navigate("/");
   };
 
   return (
@@ -43,7 +50,7 @@ export default function CustomNavbar() {
         sticky="top"
         bg="primary"
         data-bs-theme="dark"
-        className="mb-4">
+        className={location.pathname.includes("/movie/") ? "" : "mb-4"}>
         <Container>
           <Navbar.Brand as={Link} to={"/"}>
             <h3>CINEMA</h3>
@@ -66,16 +73,10 @@ export default function CustomNavbar() {
             id="navbar-nav"
             className="justify-content-end order-lg-1 order-md-3">
             <Nav>
-              <Nav.Link
-                /* as={Link}
-                to={"/favorite"} */ onClick={() => handleNavigate("/favorite")}>
+              <Nav.Link onClick={() => handleNavigate("/favorite")}>
                 Favorite
               </Nav.Link>
-              <Nav.Link
-                /* as={Link}
-                to={"/watchlist"} */ onClick={() =>
-                  handleNavigate("/watchlist")
-                }>
+              <Nav.Link onClick={() => handleNavigate("/watchlist")}>
                 Watchlist
               </Nav.Link>
             </Nav>
