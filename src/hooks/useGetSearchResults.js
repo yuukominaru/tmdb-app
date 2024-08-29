@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const apiKey = process.env.REACT_APP_APIKEY;
 const token = process.env.REACT_APP_TOKEN;
 
 export const useGetSearchResults = (query) => {
   const [searchResults, setSearchResults] = useState([]);
-  const [srError, setSrError] = useState();
+  const [srError, setSrError] = useState(false);
 
   const getSearchResults = async () => {
     const options = {
@@ -16,12 +16,23 @@ export const useGetSearchResults = (query) => {
       },
     };
 
-    const url = `https://api.themoviedb.org/3/search/movie?query=${query}&include_adult=false&language=en-US&page=1`;
+    try {
+      const url = `https://api.themoviedb.org/3/search/movie?query=${query}`;
+      const response = await fetch(url, options)
+      const responseJson = await response.json()
 
-    await fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => setSearchResults(response.results))
-      .catch((err) => setSrError(err));
+      if (responseJson && responseJson.results) {
+        setSearchResults(responseJson.results)
+      } else {
+        toast.error("Failed to get Search Results");
+        console.error("Failed to get Search Results", responseJson);
+        setSrError(true)
+      }
+    } catch (error) {
+      toast.error("Error fetching Search Results");
+      console.error("Error fetching Search Results", error);
+      setSrError(true)
+    }
   };
 
   useEffect(() => {

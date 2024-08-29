@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 
-const apiKey = process.env.REACT_APP_APIKEY;
 const token = process.env.REACT_APP_TOKEN;
 
 export const useGetPopularMovies = () => {
   const [popular, setPopular] = useState([]);
-  const [error, setError] = useState();
+  const [error, setError] = useState(false);
 
   const getPopularMovies = async () => {
     const options = {
@@ -16,13 +16,23 @@ export const useGetPopularMovies = () => {
       },
     };
 
-    const url =
-      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1";
+    try {
+      const url = "https://api.themoviedb.org/3/movie/popular";
+      const response = await fetch(url, options);
+      const responseJson = await response.json();
 
-    await fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => setPopular(response.results))
-      .catch((err) => setError(err));
+      if (responseJson && responseJson.results) {
+        setPopular(responseJson.results);
+      } else {
+        toast.error("Failed to get Popular movies");
+        console.error("Failed to get Popular movies", responseJson);
+        setError(true);
+      }
+    } catch (error) {
+      toast.error("Error fetching Popular movies");
+      console.error("Error fetching Popular movies", error);
+      setError(true);
+    }
   };
 
   useEffect(() => {

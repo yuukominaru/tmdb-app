@@ -1,12 +1,12 @@
 import { useEffect } from "react";
 import { useState } from "react";
+import { toast } from "react-toastify";
 
-const apiKey = process.env.REACT_APP_APIKEY;
 const token = process.env.REACT_APP_TOKEN;
 
 export const useGetMovieDetail = (id) => {
   const [movieDetail, setMovieDetail] = useState();
-  const [detailError, setDetailError] = useState();
+  const [detailError, setDetailError] = useState(false);
 
   const getMovieDetail = async () => {
     const options = {
@@ -17,11 +17,23 @@ export const useGetMovieDetail = (id) => {
       },
     };
 
-    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
-    await fetch(url, options)
-      .then((response) => response.json())
-      .then((response) => setMovieDetail(response))
-      .catch((err) => setDetailError(err));
+    try {
+      const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+      const response = await fetch(url, options);
+      const responseJson = await response.json();
+
+      if (responseJson) {
+        setMovieDetail(responseJson);
+      } else {
+        toast.error("Failed to get movie detail");
+        console.error("Failed to get movie detail", responseJson);
+        setDetailError(true);
+      }
+    } catch (error) {
+      toast.error("Error fetching movie detail");
+      console.error("Error fetching movie detail", error);
+      setDetailError(true);
+    }
   };
 
   useEffect(() => {
