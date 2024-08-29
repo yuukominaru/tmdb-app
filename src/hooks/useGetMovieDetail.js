@@ -2,21 +2,31 @@ import { useEffect } from "react";
 import { useState } from "react";
 
 const apiKey = process.env.REACT_APP_APIKEY;
+const token = process.env.REACT_APP_TOKEN;
 
 export const useGetMovieDetail = (id) => {
   const [movieDetail, setMovieDetail] = useState();
+  const [detailError, setDetailError] = useState();
 
   const getMovieDetail = async () => {
-    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${apiKey}&language=en-US`;
-    const response = await fetch(url);
-    const responseJson = await response.json();
+    const options = {
+      method: "GET",
+      headers: {
+        accept: "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    };
 
-    setMovieDetail(responseJson);
+    const url = `https://api.themoviedb.org/3/movie/${id}?language=en-US`;
+    await fetch(url, options)
+      .then((response) => response.json())
+      .then((response) => setMovieDetail(response))
+      .catch((err) => setDetailError(err));
   };
 
   useEffect(() => {
     getMovieDetail();
   }, []);
 
-  return { movieDetail };
+  return { movieDetail, detailError };
 };
