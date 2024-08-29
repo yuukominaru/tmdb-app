@@ -3,14 +3,21 @@ import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CardMovie from "../CardMovie";
 
-export default function TiledCard({ movie }) {
+export default function TiledCard({ movie, addFavorite, removeFavorite }) {
   return (
     <Link
       key={movie.id}
       style={{ textDecoration: "none" }}
       to={`/movie/${movie.id}`}>
-      <Col key={movie.id} className="d-flex justify-content-center mb-2">
-        <CardMovie movie={movie} />
+      <Col
+        key={movie.id}
+        lg="auto"
+        className="d-flex justify-content-center mb-2">
+        <CardMovie
+          movie={movie}
+          addFavorite={addFavorite}
+          removeFavorite={removeFavorite}
+        />
       </Col>
     </Link>
   );

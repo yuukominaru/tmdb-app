@@ -4,7 +4,12 @@ import TiledCard from "../Reusable/TiledCard";
 import Loading from "../Reusable/Loading";
 import Error from "../Reusable/Error";
 
-export default function TopRated({ movie, error }) {
+export default function TopRated({
+  movie,
+  error,
+  addFavorite,
+  removeFavorite,
+}) {
   return (
     <>
       {movie?.length === 0 ? (
@@ -15,7 +20,12 @@ export default function TopRated({ movie, error }) {
         <div className="container-fluid top-rated">
           <Row xs="2" sm="3" md="4" lg="4" xl="5">
             {movie?.map((mov) => (
-              <TiledCard key={mov?.id} movie={mov} />
+              <TiledCard
+                key={mov?.id}
+                movie={mov}
+                addFavorite={addFavorite}
+                removeFavorite={removeFavorite}
+              />
             ))}
           </Row>
         </div>

@@ -155,6 +155,7 @@ export const useGetSessionToken = () => {
         localStorage.removeItem("userSessionId");
         setAccountId(null);
 
+        localStorage.removeItem("listFavorites");
         toast.success("Logout success!");
       } else {
         toast.error("Failed to delete session");
@@ -177,8 +178,8 @@ export const useGetSessionToken = () => {
       body: JSON.stringify({ session_id: sessionId }),
     };
 
-    const url = "https://api.themoviedb.org/3/authentication/session";
     try {
+      const url = "https://api.themoviedb.org/3/authentication/session";
       const response = await fetch(url, options);
       const responseJson = await response.json();
 

@@ -21,7 +21,7 @@ export default function NowPlaying({
           <Row className="horizontal-rows">
             {movie?.map((mov) => (
               <HorizontalCard
-              key={mov?.id}
+                key={mov?.id}
                 movie={mov}
                 addFavorite={addFavorite}
                 removeFavorite={removeFavorite}

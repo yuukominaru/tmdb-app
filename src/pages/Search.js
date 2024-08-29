@@ -6,11 +6,13 @@ import { useGetPopularMovies } from "../hooks/useGetPopularMovies";
 import TiledCard from "../components/Reusable/TiledCard";
 import Loading from "../components/Reusable/Loading";
 import Error from "../components/Reusable/Error";
+import { useGetFavorites } from "../hooks/useGetFavorites";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState(null);
   const { popular, error } = useGetPopularMovies();
   const { searchResults, srError } = useGetSearchResults(searchValue);
+  const { addFavorites, removeFavorites } = useGetFavorites();
 
   return (
     <>
@@ -33,8 +35,22 @@ export default function Search() {
             ) : (
               <Row xs="2" sm="3" md="4" lg="4" xl="5" className="row-search">
                 {searchValue
-                  ? searchResults.map((mov) => <TiledCard movie={mov} />)
-                  : popular.map((mov) => <TiledCard movie={mov} />)}
+                  ? searchResults.map((mov) => (
+                      <TiledCard
+                        key={mov.id}
+                        movie={mov}
+                        addFavorite={addFavorites}
+                        removeFavorite={removeFavorites}
+                      />
+                    ))
+                  : popular.map((mov) => (
+                      <TiledCard
+                        key={mov.id}
+                        movie={mov}
+                        addFavorite={addFavorites}
+                        removeFavorite={removeFavorites}
+                      />
+                    ))}
               </Row>
             )}
           </div>
