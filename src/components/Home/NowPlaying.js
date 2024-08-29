@@ -9,6 +9,8 @@ export default function NowPlaying({
   error,
   addFavorite,
   removeFavorite,
+  addWatchlist,
+  removeWatchlist,
 }) {
   return (
     <>
@@ -25,6 +27,8 @@ export default function NowPlaying({
                 movie={mov}
                 addFavorite={addFavorite}
                 removeFavorite={removeFavorite}
+                addWatchlist={addWatchlist}
+                removeWatchlist={removeWatchlist}
               />
             ))}
           </Row>

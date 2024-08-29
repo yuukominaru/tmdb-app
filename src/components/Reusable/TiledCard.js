@@ -3,7 +3,13 @@ import { Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import CardMovie from "../CardMovie";
 
-export default function TiledCard({ movie, addFavorite, removeFavorite }) {
+export default function TiledCard({
+  movie,
+  addFavorite,
+  removeFavorite,
+  addWatchlist,
+  removeWatchlist,
+}) {
   return (
     <Link
       key={movie.id}
@@ -17,6 +23,8 @@ export default function TiledCard({ movie, addFavorite, removeFavorite }) {
           movie={movie}
           addFavorite={addFavorite}
           removeFavorite={removeFavorite}
+          addWatchlist={addWatchlist}
+          removeWatchlist={removeWatchlist}
         />
       </Col>
     </Link>

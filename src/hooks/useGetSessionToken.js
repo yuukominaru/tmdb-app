@@ -156,6 +156,7 @@ export const useGetSessionToken = () => {
         setAccountId(null);
 
         localStorage.removeItem("listFavorites");
+        localStorage.removeItem("listWatchlist");
         toast.success("Logout success!");
       } else {
         toast.error("Failed to delete session");

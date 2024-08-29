@@ -5,11 +5,13 @@ import { useGetNowPlayingMovies } from "../hooks/useGetNowPlayingMovies";
 import { useGetTopRatedMovies } from "../hooks/useGetTopRatedMovies";
 import TopRated from "../components/Home/TopRated";
 import { useGetFavorites } from "../hooks/useGetFavorites";
+import { useGetWatchlist } from "../hooks/useGetWatchlist";
 
 export default function Home() {
   const { nowPlaying, npError } = useGetNowPlayingMovies();
   const { topRated, trError } = useGetTopRatedMovies();
   const { addFavorites, removeFavorites } = useGetFavorites();
+  const { addWatchlists, removeWatchlists } = useGetWatchlist();
 
   return (
     <Container className="d-flex flex-column mb-3 gap-5">
@@ -20,6 +22,8 @@ export default function Home() {
           error={npError}
           addFavorite={addFavorites}
           removeFavorite={removeFavorites}
+          addWatchlist={addWatchlists}
+          removeWatchlist={removeWatchlists}
         />
       </div>
       <div>
@@ -29,6 +33,8 @@ export default function Home() {
           error={trError}
           addFavorite={addFavorites}
           removeFavorite={removeFavorites}
+          addWatchlist={addWatchlists}
+          removeWatchlist={removeWatchlists}
         />
       </div>
     </Container>

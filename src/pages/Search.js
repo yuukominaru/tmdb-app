@@ -7,12 +7,14 @@ import TiledCard from "../components/Reusable/TiledCard";
 import Loading from "../components/Reusable/Loading";
 import Error from "../components/Reusable/Error";
 import { useGetFavorites } from "../hooks/useGetFavorites";
+import { useGetWatchlist } from "../hooks/useGetWatchlist";
 
 export default function Search() {
   const [searchValue, setSearchValue] = useState(null);
   const { popular, error } = useGetPopularMovies();
   const { searchResults, srError } = useGetSearchResults(searchValue);
   const { addFavorites, removeFavorites } = useGetFavorites();
+  const { addWatchlists, removeWatchlists } = useGetWatchlist();
 
   return (
     <>
@@ -41,6 +43,8 @@ export default function Search() {
                         movie={mov}
                         addFavorite={addFavorites}
                         removeFavorite={removeFavorites}
+                        addWatchlist={addWatchlists}
+                        removeWatchlist={removeWatchlists}
                       />
                     ))
                   : popular.map((mov) => (
@@ -49,6 +53,8 @@ export default function Search() {
                         movie={mov}
                         addFavorite={addFavorites}
                         removeFavorite={removeFavorites}
+                        addWatchlist={addWatchlists}
+                        removeWatchlist={removeWatchlists}
                       />
                     ))}
               </Row>

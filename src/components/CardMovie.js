@@ -3,7 +3,13 @@ import Card from "react-bootstrap/Card";
 import WatchlistButton from "./Reusable/WatchlistButton";
 import FavoriteButton from "./Reusable/FavoriteButton";
 
-export default function CardMovie({ movie, addFavorite, removeFavorite }) {
+export default function CardMovie({
+  movie,
+  addFavorite,
+  removeFavorite,
+  addWatchlist,
+  removeWatchlist,
+}) {
   return (
     <Card className="d-flex flex-column h-100 bg-dark card-movie">
       <Card.Img
@@ -14,12 +20,20 @@ export default function CardMovie({ movie, addFavorite, removeFavorite }) {
       />
       <Card.ImgOverlay className="d-flex flex-column justify-content-end card-box-shadow">
         <div className="d-flex justify-content-end card-actions">
-          <WatchlistButton id={movie.id} />
-          <FavoriteButton
-            id={movie.id}
-            addFavorite={addFavorite}
-            removeFavorite={removeFavorite}
-          />
+          {addWatchlist && removeWatchlist && (
+            <WatchlistButton
+              id={movie.id}
+              addWatchlist={addWatchlist}
+              removeWatchlist={removeWatchlist}
+            />
+          )}
+          {addFavorite && removeFavorite && (
+            <FavoriteButton
+              id={movie.id}
+              addFavorite={addFavorite}
+              removeFavorite={removeFavorite}
+            />
+          )}
         </div>
         <Card.Title className="text-white">{movie.title}</Card.Title>
         <Card.Text className="text-white">

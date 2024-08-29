@@ -7,9 +7,20 @@ const sessionId = localStorage.getItem("userSessionIdV3");
 
 export const useGetFavorites = () => {
   const [favorite, setFavorite] = useState(
-    JSON.parse(localStorage.getItem("favoriteMovies")) || []
+    JSON.parse(localStorage.getItem("listFavorites")) || []
   );
   const [favError, setFavError] = useState(false);
+
+  useEffect(() => {
+    const userToken = localStorage.getItem("userSessionToken");
+    const userId = localStorage.getItem("userSessionId");
+
+    if (userToken && userId) {
+      getFavorites(userToken, userId);
+      const interval = setInterval(getFavorites(userToken, userId), 120000);
+      return () => clearInterval(interval);
+    }
+  }, []);
 
   const getFavorites = async (userToken, userId) => {
     const options = {
@@ -113,17 +124,6 @@ export const useGetFavorites = () => {
       setFavError(true);
     }
   };
-
-  useEffect(() => {
-    const userToken = localStorage.getItem("userSessionToken");
-    const userId = localStorage.getItem("userSessionId");
-
-    if (userToken && userId) {
-      getFavorites(userToken, userId);
-      const interval = setInterval(getFavorites(userToken, userId), 120000);
-      return () => clearInterval(interval);
-    }
-  }, []);
 
   return { favorite, favError, addFavorites, removeFavorites };
 };
