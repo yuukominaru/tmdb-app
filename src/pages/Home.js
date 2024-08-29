@@ -6,18 +6,18 @@ import { useGetTopRatedMovies } from "../hooks/useGetTopRatedMovies";
 import TopRated from "../components/Home/TopRated";
 
 export default function Home() {
-  const { nowPlaying } = useGetNowPlayingMovies();
-  const { topRated } = useGetTopRatedMovies();
+  const { nowPlaying, npError } = useGetNowPlayingMovies();
+  const { topRated, trError } = useGetTopRatedMovies();
 
   return (
     <Container className="d-flex flex-column mb-3 gap-5">
       <div>
         <h1>Now Playing</h1>
-        <NowPlaying movie={nowPlaying} />
+        <NowPlaying movie={nowPlaying} error={npError} />
       </div>
       <div>
         <h1>Top Rated</h1>
-        <TopRated movie={topRated} />
+        <TopRated movie={topRated} error={trError} />
       </div>
     </Container>
   );
