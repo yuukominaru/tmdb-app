@@ -31,6 +31,7 @@ export default function CustomNavbar() {
   const handleNavigate = (path) => {
     if (isLoggedIn) {
       navigate(path);
+      window.scrollTo(0, 0)
     } else {
       setModalShow(true);
     }

@@ -55,6 +55,8 @@ export default function Home() {
       <Stack spacing={2}>
         <Box sx={{ display: { xs: "none", md: "flex" } }}>
           <Pagination
+            variant="outlined"
+            color="primary"
             count={totalPage}
             size="large"
             siblingCount={0}
@@ -66,6 +68,8 @@ export default function Home() {
         </Box>
         <Box sx={{ display: { xs: "flex", md: "none" } }}>
           <Pagination
+            variant="outlined"
+            color="primary"
             count={totalPage}
             siblingCount={0}
             showFirstButton
