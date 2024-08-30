@@ -1,10 +1,19 @@
-import BookmarkBorderOutlined from "@mui/icons-material/BookmarkBorderOutlined";
-import FavoriteBorderOutlined from "@mui/icons-material/FavoriteBorderOutlined";
-import { IconButton } from "@mui/material";
 import moment from "moment";
 import React from "react";
+import WatchlistButton from "../Reusable/WatchlistButton";
+import FavoriteButton from "../Reusable/FavoriteButton";
+import RatingUser from "../Reusable/RatingUser";
 
-export default function MainContent({ movieDetail }) {
+export default function MainContent({
+  movieDetail,
+  addFavorite,
+  removeFavorite,
+  addWatchlist,
+  removeWatchlist,
+  rated,
+  addRating,
+  removeRating,
+}) {
   const runtimeHrs = Math.floor(movieDetail.runtime / 60);
   const runtimeMin = movieDetail.runtime % 60;
 
@@ -25,21 +34,23 @@ export default function MainContent({ movieDetail }) {
             `${g.name}${idx !== movieDetail.genres.length - 1 ? ", " : ""}`
         )}{" "}
         • {runtimeHrs}h {runtimeMin}m
-        <div>
-          <IconButton>
-            <BookmarkBorderOutlined
-              style={{ color: "white" }}
-              onClick={() => alert("bookmarked")}
-            />
-            {/* <Bookmark style={{ color: "white" }} /> */}
-          </IconButton>
-          <IconButton>
-            <FavoriteBorderOutlined
-              style={{ color: "white" }}
-              onClick={() => alert("favorited")}
-            />
-            {/* <Favorite style={{ color: "white" }} /> */}
-          </IconButton>
+        <div className="d-flex justify-content-start align-items-center gap-1">
+          <RatingUser
+            id={movieDetail.id}
+            rated={rated}
+            addRating={addRating}
+            removeRating={removeRating}
+          />
+          <WatchlistButton
+            id={movieDetail.id}
+            addWatchlist={addWatchlist}
+            removeWatchlist={removeWatchlist}
+          />
+          <FavoriteButton
+            id={movieDetail.id}
+            addFavorite={addFavorite}
+            removeFavorite={removeFavorite}
+          />
         </div>
         <i>{movieDetail.tagline}</i>
         <b>Overview</b>

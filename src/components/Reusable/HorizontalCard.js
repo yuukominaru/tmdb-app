@@ -11,7 +11,7 @@ export default function HorizontalCard({
   removeWatchlist,
 }) {
   return (
-    <Col key={movie.id} className="mb-1" lg="auto">
+    <Col key={movie.id} className="mb-1" lg="auto" md="auto" sm="auto" xs="auto">
       <Link style={{ textDecoration: "none" }} to={`/movie/${movie.id}`}>
         <CardMovie
           movie={movie}

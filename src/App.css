@@ -108,8 +108,8 @@ h3 {
 }
 
 .img-detail {
-  height: 100%;
-  max-height: 25rem;
+  height: 25rem;
+  max-height: 100%;
   border-radius: 10px;
 }
 
@@ -118,7 +118,22 @@ h3 {
   cursor: pointer;
 }
 
+@media (max-width: 576px) {
+  .detail-bg {
+    height: max-content !important;
+    padding: 1rem;
+  }
+
+  .detail-content {
+    flex-direction: column;
+  }
+}
+
 @media (max-width: 768px) {
+  h2 {
+    font-size: 24px !important;
+  }
+
   .card-movie {
     width: 10rem;
   }
@@ -126,9 +141,17 @@ h3 {
   .card-img {
     height: 15rem;
   }
+
+  .detail-content {
+    font-size: 12px;
+  }
 }
 
 @media (max-width: 992px) {
+  .detail-bg {
+    height: 70vh;
+  }
+
   .top-rated .card-img {
     height: 15rem !important;
   }
@@ -153,5 +176,11 @@ h3 {
 
   .row-search .card-img {
     height: 19rem;
+  }
+}
+
+@media (max-height: 700px) {
+  .img-detail {
+    height: 20rem;
   }
 }
