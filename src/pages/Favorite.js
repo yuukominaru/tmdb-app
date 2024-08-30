@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetFavorites } from "../hooks/useGetFavorites";
 import Loading from "../components/Reusable/Loading";
 import Error from "../components/Reusable/Error";
-import HorizontalCard from "../components/Reusable/HorizontalCard";
+import TiledCard from "../components/Reusable/TiledCard";
 
 export default function Favorite() {
   const { favorite, favError, addFavorites, removeFavorites } =
@@ -28,9 +28,9 @@ export default function Favorite() {
         <Error />
       ) : (
         <div className="container-fluid favorite">
-          <Row className="horizontal-rows">
+          <Row xs="2" sm="3" md="4" lg="4" xl="5">
             {favorite?.map((mov) => (
-              <HorizontalCard
+              <TiledCard
                 key={mov.id}
                 movie={mov}
                 addFavorite={addFavorites}

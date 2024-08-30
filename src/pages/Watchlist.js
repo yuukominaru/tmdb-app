@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useGetWatchlist } from "../hooks/useGetWatchlist";
 import Loading from "../components/Reusable/Loading";
 import Error from "../components/Reusable/Error";
-import HorizontalCard from "../components/Reusable/HorizontalCard";
+import TiledCard from "../components/Reusable/TiledCard";
 
 export default function Watchlist() {
   const { watchlist, wlError, addWatchlists, removeWatchlists } =
@@ -28,9 +28,9 @@ export default function Watchlist() {
         <Error />
       ) : (
         <div className="container-fluid watchlist">
-          <Row className="horizontal-rows">
+          <Row xs="2" sm="3" md="4" lg="4" xl="5">
             {watchlist?.map((mov) => (
-              <HorizontalCard
+              <TiledCard
                 key={mov.id}
                 movie={mov}
                 addWatchlist={addWatchlists}

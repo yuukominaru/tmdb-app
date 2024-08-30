@@ -10,7 +10,8 @@ export const useGetMovieDetail = (id) => {
 
   useEffect(() => {
     getMovieDetail();
-  }, []);
+    window.scrollTo(0, 0)
+  }, [id]);
 
   const getMovieDetail = async () => {
     const options = {

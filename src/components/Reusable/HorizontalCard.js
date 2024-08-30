@@ -11,16 +11,20 @@ export default function HorizontalCard({
   removeWatchlist,
 }) {
   return (
-    <Col key={movie.id} className="mb-1" lg="auto" md="auto" sm="auto" xs="auto">
-      <Link style={{ textDecoration: "none" }} to={`/movie/${movie.id}`}>
-        <CardMovie
-          movie={movie}
-          addFavorite={addFavorite}
-          removeFavorite={removeFavorite}
-          addWatchlist={addWatchlist}
-          removeWatchlist={removeWatchlist}
-        />
-      </Link>
+    <Col
+      key={movie.id}
+      className="mb-1"
+      lg="auto"
+      md="auto"
+      sm="auto"
+      xs="auto">
+      <CardMovie
+        movie={movie}
+        addFavorite={addFavorite}
+        removeFavorite={removeFavorite}
+        addWatchlist={addWatchlist}
+        removeWatchlist={removeWatchlist}
+      />
     </Col>
   );
 }

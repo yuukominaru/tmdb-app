@@ -9,7 +9,8 @@ export const useGetRecommendations = (id) => {
 
   useEffect(() => {
     getRecommendations();
-  }, []);
+    window.scrollTo(0, 0)
+  }, [id]);
 
   const getRecommendations = async () => {
     const options = {

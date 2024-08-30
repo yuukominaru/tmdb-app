@@ -11,22 +11,17 @@ export default function TiledCard({
   removeWatchlist,
 }) {
   return (
-    <Link
+    <Col
       key={movie.id}
-      style={{ textDecoration: "none" }}
-      to={`/movie/${movie.id}`}>
-      <Col
-        key={movie.id}
-        lg="auto"
-        className="d-flex justify-content-center mb-2">
-        <CardMovie
-          movie={movie}
-          addFavorite={addFavorite}
-          removeFavorite={removeFavorite}
-          addWatchlist={addWatchlist}
-          removeWatchlist={removeWatchlist}
-        />
-      </Col>
-    </Link>
+      lg="auto"
+      className="d-flex justify-content-center mb-2">
+      <CardMovie
+        movie={movie}
+        addFavorite={addFavorite}
+        removeFavorite={removeFavorite}
+        addWatchlist={addWatchlist}
+        removeWatchlist={removeWatchlist}
+      />
+    </Col>
   );
 }
