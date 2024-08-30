@@ -16,8 +16,9 @@ export const useGetFavorites = () => {
     const userId = localStorage.getItem("userSessionId");
 
     if (userToken && userId) {
-      getFavorites(userToken, userId);
-      const interval = setInterval(getFavorites(userToken, userId), 120000);
+      const fetchFavorites = () => getFavorites(userToken, userId);
+      fetchFavorites()
+      const interval = setInterval(fetchFavorites, 120000);
       return () => clearInterval(interval);
     }
   }, []);

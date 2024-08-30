@@ -8,6 +8,10 @@ export const useGetMovieDetail = (id) => {
   const [movieDetail, setMovieDetail] = useState();
   const [detailError, setDetailError] = useState(false);
 
+  useEffect(() => {
+    getMovieDetail();
+  }, []);
+
   const getMovieDetail = async () => {
     const options = {
       method: "GET",
@@ -35,10 +39,6 @@ export const useGetMovieDetail = (id) => {
       setDetailError(true);
     }
   };
-
-  useEffect(() => {
-    getMovieDetail();
-  }, []);
 
   return { movieDetail, detailError };
 };

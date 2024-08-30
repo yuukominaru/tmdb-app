@@ -7,6 +7,10 @@ export const useGetRecommendations = (id) => {
   const [recommendation, setRecommendation] = useState([]);
   const [recError, setRecError] = useState();
 
+  useEffect(() => {
+    getRecommendations();
+  }, []);
+
   const getRecommendations = async () => {
     const options = {
       method: "GET",
@@ -34,10 +38,6 @@ export const useGetRecommendations = (id) => {
       setRecError(true);
     }
   };
-
-  useEffect(() => {
-    getRecommendations();
-  }, []);
 
   return { recommendation, recError };
 };

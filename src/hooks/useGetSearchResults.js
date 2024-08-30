@@ -7,6 +7,10 @@ export const useGetSearchResults = (query) => {
   const [searchResults, setSearchResults] = useState([]);
   const [srError, setSrError] = useState(false);
 
+  useEffect(() => {
+    getSearchResults();
+  }, [query]);
+
   const getSearchResults = async () => {
     const options = {
       method: "GET",
@@ -18,26 +22,22 @@ export const useGetSearchResults = (query) => {
 
     try {
       const url = `https://api.themoviedb.org/3/search/movie?query=${query}`;
-      const response = await fetch(url, options)
-      const responseJson = await response.json()
+      const response = await fetch(url, options);
+      const responseJson = await response.json();
 
       if (responseJson && responseJson.results) {
-        setSearchResults(responseJson.results)
+        setSearchResults(responseJson.results);
       } else {
         toast.error("Failed to get Search Results");
         console.error("Failed to get Search Results", responseJson);
-        setSrError(true)
+        setSrError(true);
       }
     } catch (error) {
       toast.error("Error fetching Search Results");
       console.error("Error fetching Search Results", error);
-      setSrError(true)
+      setSrError(true);
     }
   };
-
-  useEffect(() => {
-    getSearchResults();
-  }, [query]);
 
   return { searchResults, srError };
 };

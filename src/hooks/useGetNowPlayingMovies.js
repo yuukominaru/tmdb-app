@@ -7,6 +7,10 @@ export const useGetNowPlayingMovies = () => {
   const [nowPlaying, setNowPlaying] = useState([]);
   const [npError, setNpError] = useState(false);
 
+  useEffect(() => {
+    getNowPlayingMovies();
+  }, []);
+
   const getNowPlayingMovies = async () => {
     const options = {
       method: "GET",
@@ -34,10 +38,6 @@ export const useGetNowPlayingMovies = () => {
       setNpError(true);
     }
   };
-
-  useEffect(() => {
-    getNowPlayingMovies();
-  }, []);
 
   return { nowPlaying, npError };
 };

@@ -15,8 +15,9 @@ export const useGetWatchlist = () => {
     const userId = localStorage.getItem("userSessionId");
 
     if (userToken && userId) {
-      getWatchlist(userToken, userId);
-      const interval = setInterval(getWatchlist(userToken, userId), 120000);
+      const fetchWatchlist = () => getWatchlist(userToken, userId);
+      fetchWatchlist();
+      const interval = setInterval(fetchWatchlist, 120000);
       return () => clearInterval(interval);
     }
   }, []);

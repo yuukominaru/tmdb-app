@@ -7,6 +7,10 @@ export const useGetTopRatedMovies = () => {
   const [topRated, setTopRated] = useState([]);
   const [trError, setTrError] = useState(false);
 
+  useEffect(() => {
+    getTopRatedMovies();
+  }, []);
+
   const getTopRatedMovies = async () => {
     const options = {
       method: "GET",
@@ -34,10 +38,6 @@ export const useGetTopRatedMovies = () => {
       setTrError(true);
     }
   };
-
-  useEffect(() => {
-    getTopRatedMovies();
-  }, []);
 
   return { topRated, trError };
 };

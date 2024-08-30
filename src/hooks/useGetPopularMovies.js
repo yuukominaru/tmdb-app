@@ -7,6 +7,10 @@ export const useGetPopularMovies = () => {
   const [popular, setPopular] = useState([]);
   const [error, setError] = useState(false);
 
+  useEffect(() => {
+    getPopularMovies();
+  }, []);
+
   const getPopularMovies = async () => {
     const options = {
       method: "GET",
@@ -34,10 +38,6 @@ export const useGetPopularMovies = () => {
       setError(true);
     }
   };
-
-  useEffect(() => {
-    getPopularMovies();
-  }, []);
 
   return { popular, error };
 };
